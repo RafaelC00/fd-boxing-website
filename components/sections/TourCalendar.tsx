@@ -4,69 +4,11 @@ import { motion } from 'framer-motion';
 import { Calendar, MapPin, CheckCircle, Clock, Users } from 'lucide-react';
 import { TourDate } from '@/types';
 
-// Sample tour data - replace with real data from Supabase
-const tourDates: TourDate[] = [
-  {
-    id: '1',
-    city: 'Barcelona',
-    country: 'Spain',
-    date: '2026-03-15',
-    endDate: '2026-03-16',
-    venue: 'Elite Boxing Academy',
-    status: 'confirmed',
-    spotsAvailable: 25,
-    description: '2-day intensive seminar covering fundamentals to advanced techniques'
-  },
-  {
-    id: '2',
-    city: 'Paris',
-    country: 'France',
-    date: '2026-03-22',
-    endDate: '2026-03-23',
-    venue: 'Paris Fight Club',
-    status: 'confirmed',
-    spotsAvailable: 30,
-    description: 'Technical boxing masterclass'
-  },
-  {
-    id: '3',
-    city: 'Berlin',
-    country: 'Germany',
-    date: '2026-04-05',
-    venue: 'TBA',
-    status: 'pending',
-    description: 'Venue and details to be confirmed'
-  },
-  {
-    id: '4',
-    city: 'Amsterdam',
-    country: 'Netherlands',
-    date: '2026-04-12',
-    venue: 'Available',
-    status: 'available',
-    description: 'Open date - book your academy now!'
-  },
-  {
-    id: '5',
-    city: 'Rome',
-    country: 'Italy',
-    date: '2026-04-19',
-    endDate: '2026-04-20',
-    venue: 'Roman Boxing Center',
-    status: 'confirmed',
-    spotsAvailable: 20,
-    description: 'Weekend intensive training'
-  },
-  {
-    id: '6',
-    city: 'London',
-    country: 'United Kingdom',
-    date: '2026-05-03',
-    venue: 'Available',
-    status: 'available',
-    description: 'Open date - be the first to book!'
-  },
-];
+// Sample tour data removed - now passed via props
+
+interface TourCalendarProps {
+  tourDates: TourDate[];
+}
 
 const StatusBadge = ({ status }: { status: TourDate['status'] }) => {
   const badges = {
@@ -86,7 +28,7 @@ const StatusBadge = ({ status }: { status: TourDate['status'] }) => {
   );
 };
 
-export default function TourCalendar() {
+export default function TourCalendar({ tourDates }: TourCalendarProps) {
   const formatDate = (date: string, endDate?: string) => {
     const start = new Date(date);
     const startFormatted = start.toLocaleDateString('en-US', {
@@ -199,7 +141,7 @@ export default function TourCalendar() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center bg-white rounded-lg shadow-lg p-8"
+          className="text-center rounded-lg shadow-lg p-8"
         >
           <h3 className="text-2xl font-bold text-fd-black mb-4">
             Don't see your city?

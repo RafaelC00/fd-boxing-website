@@ -6,11 +6,43 @@ import BookingForm from '@/components/sections/BookingForm';
 import Gallery from '@/components/sections/Gallery';
 import Testimonials from '@/components/sections/Testimonials';
 
-export default function Home() {
+import { supabase } from '@/lib/supabase';
+import { TourDate } from '@/types';
+
+export const revalidate = 0; // Ensure fresh data on every request
+
+async function getTourDates(): Promise<TourDate[]> {
+  const { data, error } = await supabase
+    .from('tour_dates')
+    .select('*')
+    .order('date', { ascending: true });
+
+  if (error) {
+    console.error('Error fetching tour dates:', error);
+    return [];
+  }
+
+  // Transform snake_case DB fields to camelCase TS types
+  return (data || []).map((item) => ({
+    id: item.id,
+    city: item.city,
+    country: item.country,
+    date: item.date,
+    endDate: item.end_date || undefined,
+    venue: item.venue,
+    status: item.status,
+    spotsAvailable: item.spots_available || undefined,
+    description: item.description || undefined,
+  }));
+}
+
+export default async function Home() {
+  const tourDates = await getTourDates();
+
   return (
     <main className="min-h-screen">
       <Hero />
-      <TourCalendar />
+      <TourCalendar tourDates={tourDates} />
       <BookingForm />
       <VideoBackground />
     </main>
