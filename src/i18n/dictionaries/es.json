@@ -7,7 +7,7 @@
     },
     "nav": {
         "tour": "Tour Europeo",
-        "about": "Nosotros",
+        "about": "Sobre Coach Devesa",
         "gallery": "Galería",
         "testimonials": "Testimonios",
         "contact": "Contacto"
@@ -18,25 +18,76 @@
         "description": "Boxeo Real Para Todos"
     },
     "about": {
-        "title": "CÓMO EMPEZAMOS EN ESTE NEGOCIO",
-        "p1": "FEDERICO DEVESA ES UN ENTRENADOR Y COMPETIDOR DE BOXEO DE CLASE MUNDIAL CON AÑOS DE EXPERIENCIA EN EL RING Y COMO MENTOR. SU ENFOQUE BASADO EN LA TÉCNICA HA AYUDADO A CIENTOS DE ATLETAS A PERFECCIONAR SU ARTE, DESDE EL TRABAJO DE PIES FUNDAMENTAL HASTA ESTRATEGIAS AVANZADAS DE CONTRAATAQUE.",
-        "p2": "EL TOUR EUROPEO 2026 NACE DE LA PASIÓN POR DIFUNDIR EL 'BOXEO REAL PARA TODOS'. AL LLEVAR MASTERCLASSES DE NIVEL PROFESIONAL A ACADEMIAS DE TODO EL CONTINENTE, FEDERICO BUSCA ELEVAR EL ESTÁNDAR DEL ENTRENAMIENTO DE BOXEO Y CONSTRUIR UNA COMUNIDAD GLOBAL DE LUCHADORES DISCIPLINADOS.",
-        "cta": "REGISTRARSE"
+        "title": "SOBRE COACH DEVESA",
+        "p1": "Federico Devesa es ex boxeador profesional y entrenador certificado por la Federación Argentina de Box. Su carrera competitiva abarca múltiples disciplinas de combate, lo que le permite enseñar un sistema completo y aplicable: técnica real, defensa, desplazamientos, timing y mentalidad de pelea.",
+        "p2": "Además, Federico logró campeonatos en full contact - kickboxing, Brazilian Jiu-Jitsu, consolidándose como una referencia nacional por su versatilidad y experiencia. En Europa, Federico presenta masterclasses intensivas para todos los niveles: progresiones simples, correcciones finas y un método que te deja herramientas concretas para mejorar desde el primer día.",
+        "p3": "El enfoque de Federico Devesa combina precisión técnica con aplicación práctica. Sus seminarios se centran en fundamentos que se trasladan directamente a la competencia y a la defensa personal. Con experiencia en múltiples disciplinas, aporta una mirada única que enriquece la metodología tradicional del boxeo con aprendizajes del striking y del grappling.",
+        "credentials": {
+            "title": "Credenciales y Logros",
+            "items": [
+                "Ex-boxeador profesional (Argentina)",
+                "Director técnico - Federación Argentina de Boxeo (FAB)",
+                "Campeón de Full Contact",
+                "Faixa azul, Competidor de Brazilian Jiu-Jitsu",
+                "Referencia Nacional de Artes Marciales en Argentina",
+                "Autor: 'Boxeo Para Todos'"
+            ]
+        },
+        "cta": "Reservar Seminario"
     },
     "tour": {
-        "title": "Seminarios / Master Classes",
-        "description": "Únete a Federico De Vesa mientras lleva entrenamiento de boxeo de clase mundial por toda Europa. Reserva el lugar de tu academia o asiste a un seminario confirmado.",
+        "title": "Seminarios & Master Classes",
+        "description": "Únete a Federico Devesa mientras lleva entrenamiento de boxeo de clase mundial por toda Europa. Reserva el lugar de tu academia para Mayo-Junio 2026.",
         "venue": "Lugar",
         "spots": "Plazas Disponibles",
         "bookDate": "Reservar esta Fecha",
         "register": "Registrarse para Asistir",
         "comingSoon": "Detalles próximamente...",
         "notListedTitle": "¿No ves tu ciudad?",
-        "notListedDesc": "¡Reserva a Federico para tu academia o gimnasio! Estamos expandiendo activamente el tour y nos encantaría llevar el entrenamiento de FD-Boxing a tu ubicación."
+        "notListedDesc": "¡Reserva a Federico para tu academia o gimnasio! Estamos expandiendo activamente el tour por España y Europa. Contáctanos para llevar el entrenamiento de FD-Boxing a tu ubicación."
+    },
+    "seminars": {
+        "title": "Formatos de Seminarios",
+        "subtitle": "Elige el formato que mejor se adapte a las necesidades de tu academia",
+        "group": {
+            "title": "Seminarios Grupales (1-2 Horas)",
+            "description": "Sesiones técnicas intensivas diseñadas para academias y clubes de boxeo. Ideal para grupos de nivel mixto que buscan mejorar fundamentos, sumar herramientas nuevas y llevarse un método aplicable desde el primer día.",
+            "duration": "1-2 horas",
+            "groupSize": "15-40 participantes",
+            "audience": "Todos los niveles (principiantes a avanzados)",
+            "topics": [
+                "Fundamentos de boxeo: postura, desplazamientos, balance y estabilidad",
+                "Sistemas defensivos: esquives, bloqueos, desvíos",
+                "Combinaciones: secuencias ofensivas + contraataques",
+                "Manejo de distancia y control del ring",
+                "Trabajo de manoplas para coaches: técnica, correcciones, estructura de rounds",
+                "Charla motivacional y técnica: pesajes, peleas, boxeadores amateurs, etc."
+            ],
+            "price": "€20 por alumno (€3 para el gym)"
+        },
+        "private": {
+            "title": "Entrenamiento Privado",
+            "description": "Sesiones 1 a 1 o en grupos reducidos (1 a 8 personas) para boxeadores y alumnos que buscan atención personalizada bajo la tutela de Federico Devesa. Ideal para preparación competitiva, refinamiento técnico y desarrollo intensivo de habilidades.",
+            "duration": "Flexible (típicamente 1-2 horas)",
+            "groupSize": "1-8 participantes",
+            "audience": "Luchadores competitivos, profesionales aspirantes",
+            "focus": "Corrección técnica paso a paso, revisando y ajustando todos los conceptos clave del boxeo: postura y guardia, desplazamientos, manejo de distancia, bloqueos y parries, esquives y head movement, movimientos de piernas, coordinación y timing.",
+            "price": "€25 por alumno (máximo 8)"
+        }
     },
     "booking": {
-        "title": "Reservar un Seminario",
-        "description": "Lleva entrenamiento de boxeo de clase mundial a tu academia. Completa el formulario a continuación y te responderemos en 24 horas para discutir la disponibilidad y los detalles.",
+        "title": "Información de Reservas",
+        "description": "Federico estará disponible en Europa desde fines de mayo hasta mediados de junio de 2026. La primera etapa del tour se enfoca principalmente en España, con posibilidad de sumar fechas adicionales y extender el recorrido según las reservas confirmadas. Se recomienda reservar con anticipación para asegurar las fechas preferidas.",
+        "howToBook": {
+            "title": "Cómo Reservar",
+            "steps": [
+                "Contáctanos indicando el formato deseado (Seminario / Entrenamiento Privado)",
+                "Enviá tu ubicación, fechas propuestas y tamaño estimado del grupo",
+                "Recibí una propuesta personalizada con precio y logística",
+                "Confirmá la reserva con seña/depósito",
+                "Promocioná el evento para tus miembros y comunidad"
+            ]
+        },
         "sections": {
             "academy": "Información de la Academia",
             "contact": "Información de Contacto",
@@ -61,23 +112,36 @@
             "phone": "+34 600 123 456",
             "city": "Barcelona",
             "country": "España",
-            "preferredDates": "15-16 de Marzo, 2026",
-            "message": "Cuéntanos sobre tu academia, nivel de los participantes..."
+            "preferredDates": "25-26 de Mayo, 2026",
+            "expectedParticipants": "20-30",
+            "message": "Cuéntanos sobre tu academia, nivel de los participantes, formato de seminario preferido..."
         },
         "submit": "Enviar Solicitud de Reserva",
         "submitting": "Enviando...",
         "success": "¡Solicitud de Reserva Enviada!",
         "successDesc": "Nos pondremos en contacto contigo en 24 horas para confirmar los detalles.",
         "error": "Error en el Envío",
-        "errorDesc": "Por favor, inténtalo de nuevo o contáctanos directamente en info@fdboxing.com"
+        "errorDesc": "Por favor, inténtalo de nuevo o contáctanos directamente en fededevesa81@gmail.com"
     },
     "gallery": {
         "title": "Galería",
-        "description": "Momentos de seminarios, sesiones de entrenamiento y eventos por toda Europa"
+        "description": "Momentos de seminarios, sesiones de entrenamiento y eventos"
     },
     "testimonials": {
         "title": "Lo Que Dice la Gente",
         "description": "Escucha de entrenadores, luchadores y dueños de academias que han vivido los seminarios de FD-Boxing",
         "cta": "Reserva tu Seminario Hoy"
+    },
+    "footer": {
+        "tagline": "Boxeo Real Para Todos",
+        "description": "Entrenamiento profesional de boxeo y seminarios por toda Europa",
+        "quickLinks": "Enlaces Rápidos",
+        "connect": "Conectar",
+        "contact": {
+            "email": "fededevesa81@gmail.com",
+            "phone": "+54 9 11 5629 5221",
+            "instagram": "@federicodevesa",
+            "website": "fdboxing.com"
+        }
     }
 }
