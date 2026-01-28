@@ -1,0 +1,83 @@
+{
+    "common": {
+        "bookNow": "Book Now",
+        "requestSeminar": "Request a Seminar",
+        "followUs": "Follow us on Instagram for daily updates",
+        "loading": "Loading..."
+    },
+    "nav": {
+        "tour": "European Tour",
+        "about": "About",
+        "gallery": "Gallery",
+        "testimonials": "Testimonials",
+        "contact": "Contact"
+    },
+    "hero": {
+        "title": "FEDERICO DEVESA",
+        "subtitle": "EUROPE TOUR 2026",
+        "description": "Real Boxing For Everyone"
+    },
+    "about": {
+        "title": "HOW WE GOT STARTED IN THIS BUSINESS",
+        "p1": "FEDERICO DEVESA IS A WORLD-CLASS BOXING COACH AND COMPETITOR WITH YEARS OF EXPERIENCE IN THE RING AND AS A MENTOR. HIS TECHNIQUE-DRIVEN APPROACH HAS HELPED HUNDREDS OF ATHLETES REFINE THEIR CRAFT, FROM FUNDAMENTAL FOOTWORK TO ADVANCED COUNTER-PUNCHING STRATEGIES.",
+        "p2": "THE 2026 EUROPEAN TOUR IS BORN FROM A PASSION TO SPREAD 'REAL BOXING FOR EVERYONE'. BY BRINGING PROFESSIONAL-LEVEL MASTERCLASSES TO ACADEMIES ACROSS THE CONTINENT, FEDERICO AIMS TO ELEVATE THE STANDARD OF BOXING TRAINING AND BUILD A GLOBAL COMMUNITY OF DISCIPLINED FIGHTERS.",
+        "cta": "SIGN UP"
+    },
+    "tour": {
+        "title": "Seminars / Master Classes",
+        "description": "Join Federico De Vesa as he brings world-class boxing training across Europe. Book your academy's spot or attend a confirmed seminar.",
+        "venue": "Venue",
+        "spots": "Spots Available",
+        "bookDate": "Book This Date",
+        "register": "Register to Attend",
+        "comingSoon": "Details coming soon...",
+        "notListedTitle": "Don't see your city?",
+        "notListedDesc": "Book Federico for your academy or gym! We're actively expanding the tour and would love to bring FD-Boxing training to your location."
+    },
+    "booking": {
+        "title": "Book a Seminar",
+        "description": "Bring world-class boxing training to your academy. Fill out the form below and we'll get back to you within 24 hours to discuss availability and details.",
+        "sections": {
+            "academy": "Academy Information",
+            "contact": "Contact Information",
+            "location": "Location & Event Details",
+            "additional": "Additional Information"
+        },
+        "fields": {
+            "academyName": "Academy/Gym Name *",
+            "contactPerson": "Contact Person *",
+            "email": "Email Address *",
+            "phone": "Phone Number *",
+            "city": "City *",
+            "country": "Country *",
+            "preferredDates": "Preferred Dates *",
+            "expectedParticipants": "Expected Participants *",
+            "message": "Additional Information *"
+        },
+        "placeholders": {
+            "academyName": "Elite Boxing Academy",
+            "contactPerson": "John Smith",
+            "email": "contact@academy.com",
+            "phone": "+34 600 123 456",
+            "city": "Barcelona",
+            "country": "Spain",
+            "preferredDates": "March 15-16, 2026",
+            "message": "Tell us about your academy, training level..."
+        },
+        "submit": "Submit Booking Request",
+        "submitting": "Submitting...",
+        "success": "Booking Request Submitted!",
+        "successDesc": "We'll contact you within 24 hours to confirm details.",
+        "error": "Submission Failed",
+        "errorDesc": "Please try again or contact us directly at info@fdboxing.com"
+    },
+    "gallery": {
+        "title": "Gallery",
+        "description": "Moments from seminars, training sessions, and events across Europe"
+    },
+    "testimonials": {
+        "title": "What People Say",
+        "description": "Hear from coaches, fighters, and academy owners who have experienced FD-Boxing seminars",
+        "cta": "Book Your Seminar Today"
+    }
+}

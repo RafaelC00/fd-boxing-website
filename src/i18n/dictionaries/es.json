@@ -1,0 +1,83 @@
+{
+    "common": {
+        "bookNow": "Reservar Ahora",
+        "requestSeminar": "Solicitar Seminario",
+        "followUs": "Síguenos en Instagram para actualizaciones diarias",
+        "loading": "Cargando..."
+    },
+    "nav": {
+        "tour": "Tour Europeo",
+        "about": "Nosotros",
+        "gallery": "Galería",
+        "testimonials": "Testimonios",
+        "contact": "Contacto"
+    },
+    "hero": {
+        "title": "FEDERICO DEVESA",
+        "subtitle": "EUROPA TOUR 2026",
+        "description": "Boxeo Real Para Todos"
+    },
+    "about": {
+        "title": "CÓMO EMPEZAMOS EN ESTE NEGOCIO",
+        "p1": "FEDERICO DEVESA ES UN ENTRENADOR Y COMPETIDOR DE BOXEO DE CLASE MUNDIAL CON AÑOS DE EXPERIENCIA EN EL RING Y COMO MENTOR. SU ENFOQUE BASADO EN LA TÉCNICA HA AYUDADO A CIENTOS DE ATLETAS A PERFECCIONAR SU ARTE, DESDE EL TRABAJO DE PIES FUNDAMENTAL HASTA ESTRATEGIAS AVANZADAS DE CONTRAATAQUE.",
+        "p2": "EL TOUR EUROPEO 2026 NACE DE LA PASIÓN POR DIFUNDIR EL 'BOXEO REAL PARA TODOS'. AL LLEVAR MASTERCLASSES DE NIVEL PROFESIONAL A ACADEMIAS DE TODO EL CONTINENTE, FEDERICO BUSCA ELEVAR EL ESTÁNDAR DEL ENTRENAMIENTO DE BOXEO Y CONSTRUIR UNA COMUNIDAD GLOBAL DE LUCHADORES DISCIPLINADOS.",
+        "cta": "REGISTRARSE"
+    },
+    "tour": {
+        "title": "Seminarios / Master Classes",
+        "description": "Únete a Federico De Vesa mientras lleva entrenamiento de boxeo de clase mundial por toda Europa. Reserva el lugar de tu academia o asiste a un seminario confirmado.",
+        "venue": "Lugar",
+        "spots": "Plazas Disponibles",
+        "bookDate": "Reservar esta Fecha",
+        "register": "Registrarse para Asistir",
+        "comingSoon": "Detalles próximamente...",
+        "notListedTitle": "¿No ves tu ciudad?",
+        "notListedDesc": "¡Reserva a Federico para tu academia o gimnasio! Estamos expandiendo activamente el tour y nos encantaría llevar el entrenamiento de FD-Boxing a tu ubicación."
+    },
+    "booking": {
+        "title": "Reservar un Seminario",
+        "description": "Lleva entrenamiento de boxeo de clase mundial a tu academia. Completa el formulario a continuación y te responderemos en 24 horas para discutir la disponibilidad y los detalles.",
+        "sections": {
+            "academy": "Información de la Academia",
+            "contact": "Información de Contacto",
+            "location": "Ubicación y Detalles del Evento",
+            "additional": "Información Adicional"
+        },
+        "fields": {
+            "academyName": "Nombre de la Academia/Gimnasio *",
+            "contactPerson": "Persona de Contacto *",
+            "email": "Correo Electrónico *",
+            "phone": "Número de Teléfono *",
+            "city": "Ciudad *",
+            "country": "País *",
+            "preferredDates": "Fechas Preferidas *",
+            "expectedParticipants": "Participantes Esperados *",
+            "message": "Información Adicional *"
+        },
+        "placeholders": {
+            "academyName": "Elite Boxing Academy",
+            "contactPerson": "Juan Pérez",
+            "email": "contacto@academia.com",
+            "phone": "+34 600 123 456",
+            "city": "Barcelona",
+            "country": "España",
+            "preferredDates": "15-16 de Marzo, 2026",
+            "message": "Cuéntanos sobre tu academia, nivel de los participantes..."
+        },
+        "submit": "Enviar Solicitud de Reserva",
+        "submitting": "Enviando...",
+        "success": "¡Solicitud de Reserva Enviada!",
+        "successDesc": "Nos pondremos en contacto contigo en 24 horas para confirmar los detalles.",
+        "error": "Error en el Envío",
+        "errorDesc": "Por favor, inténtalo de nuevo o contáctanos directamente en info@fdboxing.com"
+    },
+    "gallery": {
+        "title": "Galería",
+        "description": "Momentos de seminarios, sesiones de entrenamiento y eventos por toda Europa"
+    },
+    "testimonials": {
+        "title": "Lo Que Dice la Gente",
+        "description": "Escucha de entrenadores, luchadores y dueños de academias que han vivido los seminarios de FD-Boxing",
+        "cta": "Reserva tu Seminario Hoy"
+    }
+}

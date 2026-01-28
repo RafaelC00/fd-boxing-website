@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -26,20 +26,35 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+export default async function RootLayout(props: {
   children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Header />
-        {children}
-        <Footer />
-      </body>
-    </html>
-  );
+  params: any;
+}) {
+  try {
+    const { lang } = await props.params;
+    console.log('RootLayout rendering for lang:', lang);
+
+    return (
+      <html lang={lang}>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <Header lang={lang} />
+          {props.children}
+          <Footer />
+        </body>
+      </html>
+    );
+  } catch (err: any) {
+    console.error('LAYOUT ERROR:', err);
+    return (
+      <html>
+        <body className="p-10 bg-red-50 text-red-900">
+          <h1 className="text-2xl font-bold">Layout Error</h1>
+          <pre className="mt-4 p-4 bg-white rounded">{err.message}</pre>
+          <pre className="mt-2 text-xs opacity-50">{err.stack}</pre>
+        </body>
+      </html>
+    );
+  }
 }

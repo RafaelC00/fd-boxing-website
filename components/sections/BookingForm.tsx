@@ -7,16 +7,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 
-const bookingSchema = z.object({
-  academyName: z.string().min(2, 'Academy name must be at least 2 characters'),
-  contactName: z.string().min(2, 'Contact name must be at least 2 characters'),
-  email: z.string().email('Please enter a valid email address'),
-  phone: z.string().min(10, 'Please enter a valid phone number'),
-  city: z.string().min(2, 'City must be at least 2 characters'),
-  country: z.string().min(2, 'Country must be at least 2 characters'),
-  preferredDates: z.string().min(5, 'Please provide preferred dates'),
-  numberOfParticipants: z.coerce.number().min(5, 'Minimum 5 participants required'),
-  message: z.string().min(20, 'Please provide more details (minimum 20 characters)'),
+const createBookingSchema = (dict: any) => z.object({
+  academyName: z.string().min(2, dict.fields.academyName),
+  contactName: z.string().min(2, dict.fields.contactPerson),
+  email: z.string().email(dict.fields.email),
+  phone: z.string().min(10, dict.fields.phone),
+  city: z.string().min(2, dict.fields.city),
+  country: z.string().min(2, dict.fields.country),
+  preferredDates: z.string().min(5, dict.fields.preferredDates),
+  numberOfParticipants: z.coerce.number().min(5, dict.fields.expectedParticipants),
+  message: z.string().min(10, dict.fields.message),
 });
 
 interface BookingFormData {
@@ -31,11 +31,9 @@ interface BookingFormData {
   message: string;
 }
 
-type BookingFormSchema = BookingFormData;
-
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
-export default function BookingForm() {
+export default function BookingForm({ dict }: { dict: any }) {
   const [formStatus, setFormStatus] = useState<FormStatus>('idle');
 
   const {
@@ -43,15 +41,16 @@ export default function BookingForm() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<BookingFormSchema>({
-    resolver: zodResolver(bookingSchema) as any,
+  } = useForm<BookingFormData>({
+    resolver: zodResolver(createBookingSchema(dict)) as any,
   });
 
-  const onSubmit = async (data: BookingFormSchema) => {
+  if (!dict) return null;
+
+  const onSubmit = async (data: BookingFormData) => {
     setFormStatus('submitting');
 
     try {
-      // TODO: Replace with actual Supabase integration
       const response = await fetch('/api/bookings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -82,13 +81,12 @@ export default function BookingForm() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-white text-sm uppercase tracking-wider mb-2">Request a Seminar</p>
+          <p className="text-white text-sm uppercase tracking-widest font-bold mb-2">{dict.title.split(' ')[0]}</p>
           <h2 className="text-4xl md:text-5xl font-black uppercase text-white mb-6">
-            Book a <span className="text-fd-black">Seminar</span>
+            {dict.title.split(' ')[0]} <span className="text-fd-black">{dict.title.split(' ')[1]} {dict.title.split(' ')[2]}</span>
           </h2>
-          <p className="text-white/90 text-lg max-w-2xl mx-auto">
-            Bring world-class boxing training to your academy. Fill out the form below
-            and we'll get back to you within 24 hours to discuss availability and details.
+          <p className="text-white/90 text-lg max-w-2xl mx-auto uppercase font-medium">
+            {dict.description}
           </p>
         </motion.div>
 
@@ -104,8 +102,8 @@ export default function BookingForm() {
               <div className="mb-8 bg-green-50 border-l-4 border-green-500 p-4 rounded-lg flex items-start gap-3">
                 <CheckCircle className="text-green-500 flex-shrink-0 mt-1" size={24} />
                 <div>
-                  <h3 className="font-semibold text-green-800 mb-1">Booking Request Submitted!</h3>
-                  <p className="text-green-700">We'll contact you within 24 hours to confirm details.</p>
+                  <h3 className="font-bold text-green-800 mb-1 uppercase tracking-tight">{dict.success}</h3>
+                  <p className="text-green-700 uppercase text-sm font-medium">{dict.successDesc}</p>
                 </div>
               </div>
             )}
@@ -114,8 +112,8 @@ export default function BookingForm() {
               <div className="mb-8 bg-red-50 border-l-4 border-red-500 p-4 rounded-lg flex items-start gap-3">
                 <AlertCircle className="text-red-500 flex-shrink-0 mt-1" size={24} />
                 <div>
-                  <h3 className="font-semibold text-red-800 mb-1">Submission Failed</h3>
-                  <p className="text-red-700">Please try again or contact us directly at info@fdboxing.com</p>
+                  <h3 className="font-bold text-red-800 mb-1 uppercase tracking-tight">{dict.error}</h3>
+                  <p className="text-red-700 uppercase text-sm font-medium">{dict.errorDesc}</p>
                 </div>
               </div>
             )}
@@ -123,41 +121,41 @@ export default function BookingForm() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
               {/* Academy Information Section */}
               <div>
-                <h3 className="text-xl font-bold text-fd-black mb-6 pb-3 border-b-2 border-gray-200">
-                  Academy Information
+                <h3 className="text-xl font-bold text-fd-black mb-6 pb-3 border-b-2 border-gray-200 uppercase tracking-widest">
+                  {dict.sections.academy}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Academy Name */}
                   <div>
-                    <label htmlFor="academyName" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Academy/Gym Name *
+                    <label htmlFor="academyName" className="block text-sm font-bold text-gray-700 mb-2 uppercase">
+                      {dict.fields.academyName}
                     </label>
                     <input
                       {...register('academyName')}
                       type="text"
                       id="academyName"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
-                      placeholder="Elite Boxing Academy"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all uppercase placeholder:normal-case font-medium"
+                      placeholder={dict.placeholders.academyName}
                     />
                     {errors.academyName && (
-                      <p className="mt-1 text-sm text-red-600">{errors.academyName.message}</p>
+                      <p className="mt-1 text-xs font-bold text-red-600 uppercase">{errors.academyName.message}</p>
                     )}
                   </div>
 
                   {/* Contact Name */}
                   <div>
-                    <label htmlFor="contactName" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Contact Person *
+                    <label htmlFor="contactName" className="block text-sm font-bold text-gray-700 mb-2 uppercase">
+                      {dict.fields.contactPerson}
                     </label>
                     <input
                       {...register('contactName')}
                       type="text"
                       id="contactName"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
-                      placeholder="John Smith"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all uppercase placeholder:normal-case font-medium"
+                      placeholder={dict.placeholders.contactPerson}
                     />
                     {errors.contactName && (
-                      <p className="mt-1 text-sm text-red-600">{errors.contactName.message}</p>
+                      <p className="mt-1 text-xs font-bold text-red-600 uppercase">{errors.contactName.message}</p>
                     )}
                   </div>
                 </div>
@@ -165,41 +163,41 @@ export default function BookingForm() {
 
               {/* Contact Information Section */}
               <div>
-                <h3 className="text-xl font-bold text-fd-black mb-6 pb-3 border-b-2 border-gray-200">
-                  Contact Information
+                <h3 className="text-xl font-bold text-fd-black mb-6 pb-3 border-b-2 border-gray-200 uppercase tracking-widest">
+                  {dict.sections.contact}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Email */}
                   <div>
-                    <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Email Address *
+                    <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-2 uppercase">
+                      {dict.fields.email}
                     </label>
                     <input
                       {...register('email')}
                       type="email"
                       id="email"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
-                      placeholder="contact@academy.com"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all uppercase placeholder:normal-case font-medium"
+                      placeholder={dict.placeholders.email}
                     />
                     {errors.email && (
-                      <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                      <p className="mt-1 text-xs font-bold text-red-600 uppercase">{errors.email.message}</p>
                     )}
                   </div>
 
                   {/* Phone */}
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Phone Number *
+                    <label htmlFor="phone" className="block text-sm font-bold text-gray-700 mb-2 uppercase">
+                      {dict.fields.phone}
                     </label>
                     <input
                       {...register('phone')}
                       type="tel"
                       id="phone"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
-                      placeholder="+34 600 123 456"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all uppercase placeholder:normal-case font-medium"
+                      placeholder={dict.placeholders.phone}
                     />
                     {errors.phone && (
-                      <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
+                      <p className="mt-1 text-xs font-bold text-red-600 uppercase">{errors.phone.message}</p>
                     )}
                   </div>
                 </div>
@@ -207,76 +205,76 @@ export default function BookingForm() {
 
               {/* Location & Event Details Section */}
               <div>
-                <h3 className="text-xl font-bold text-fd-black mb-6 pb-3 border-b-2 border-gray-200">
-                  Location & Event Details
+                <h3 className="text-xl font-bold text-fd-black mb-6 pb-3 border-b-2 border-gray-200 uppercase tracking-widest">
+                  {dict.sections.location}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* City */}
                   <div>
-                    <label htmlFor="city" className="block text-sm font-semibold text-gray-700 mb-2">
-                      City *
+                    <label htmlFor="city" className="block text-sm font-bold text-gray-700 mb-2 uppercase">
+                      {dict.fields.city}
                     </label>
                     <input
                       {...register('city')}
                       type="text"
                       id="city"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
-                      placeholder="Barcelona"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all uppercase placeholder:normal-case font-medium"
+                      placeholder={dict.placeholders.city}
                     />
                     {errors.city && (
-                      <p className="mt-1 text-sm text-red-600">{errors.city.message}</p>
+                      <p className="mt-1 text-xs font-bold text-red-600 uppercase">{errors.city.message}</p>
                     )}
                   </div>
 
                   {/* Country */}
                   <div>
-                    <label htmlFor="country" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Country *
+                    <label htmlFor="country" className="block text-sm font-bold text-gray-700 mb-2 uppercase">
+                      {dict.fields.country}
                     </label>
                     <input
                       {...register('country')}
                       type="text"
                       id="country"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
-                      placeholder="Spain"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all uppercase placeholder:normal-case font-medium"
+                      placeholder={dict.placeholders.country}
                     />
                     {errors.country && (
-                      <p className="mt-1 text-sm text-red-600">{errors.country.message}</p>
+                      <p className="mt-1 text-xs font-bold text-red-600 uppercase">{errors.country.message}</p>
                     )}
                   </div>
 
                   {/* Preferred Dates */}
                   <div>
-                    <label htmlFor="preferredDates" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Preferred Dates *
+                    <label htmlFor="preferredDates" className="block text-sm font-bold text-gray-700 mb-2 uppercase">
+                      {dict.fields.preferredDates}
                     </label>
                     <input
                       {...register('preferredDates')}
                       type="text"
                       id="preferredDates"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
-                      placeholder="March 15-16, 2026"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all uppercase placeholder:normal-case font-medium"
+                      placeholder={dict.placeholders.preferredDates}
                     />
                     {errors.preferredDates && (
-                      <p className="mt-1 text-sm text-red-600">{errors.preferredDates.message}</p>
+                      <p className="mt-1 text-xs font-bold text-red-600 uppercase">{errors.preferredDates.message}</p>
                     )}
                   </div>
 
                   {/* Number of Participants */}
                   <div>
-                    <label htmlFor="numberOfParticipants" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Expected Participants *
+                    <label htmlFor="numberOfParticipants" className="block text-sm font-bold text-gray-700 mb-2 uppercase">
+                      {dict.fields.expectedParticipants}
                     </label>
                     <input
                       {...register('numberOfParticipants')}
                       type="number"
                       id="numberOfParticipants"
                       min="5"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all font-medium"
                       placeholder="20"
                     />
                     {errors.numberOfParticipants && (
-                      <p className="mt-1 text-sm text-red-600">{errors.numberOfParticipants.message}</p>
+                      <p className="mt-1 text-xs font-bold text-red-600 uppercase">{errors.numberOfParticipants.message}</p>
                     )}
                   </div>
                 </div>
@@ -284,23 +282,23 @@ export default function BookingForm() {
 
               {/* Additional Information Section */}
               <div>
-                <h3 className="text-xl font-bold text-fd-black mb-6 pb-3 border-b-2 border-gray-200">
-                  Additional Information
+                <h3 className="text-xl font-bold text-fd-black mb-6 pb-3 border-b-2 border-gray-200 uppercase tracking-widest">
+                  {dict.sections.additional}
                 </h3>
                 {/* Message */}
                 <div>
-                  <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Additional Information *
+                  <label htmlFor="message" className="block text-sm font-bold text-gray-700 mb-2 uppercase">
+                    {dict.fields.message}
                   </label>
                   <textarea
                     {...register('message')}
                     id="message"
                     rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all resize-none"
-                    placeholder="Tell us about your academy, training level of participants, specific topics you'd like to cover, facilities available, etc."
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all resize-none font-medium uppercase placeholder:normal-case"
+                    placeholder={dict.placeholders.message}
                   />
                   {errors.message && (
-                    <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
+                    <p className="mt-1 text-xs font-bold text-red-600 uppercase">{errors.message.message}</p>
                   )}
                 </div>
               </div>
@@ -310,24 +308,24 @@ export default function BookingForm() {
                 <button
                   type="submit"
                   disabled={formStatus === 'submitting'}
-                  className="bg-fd-red text-white px-10 py-4 rounded-lg font-semibold text-lg hover:bg-red-700 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  className="bg-fd-red text-white px-10 py-4 rounded-lg font-bold text-sm tracking-widest uppercase hover:bg-red-700 transition-all duration-200 shadow-xl hover:shadow-fd-red/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                 >
                   {formStatus === 'submitting' ? (
                     <>
                       <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      Submitting...
+                      {dict.submitting}
                     </>
                   ) : (
                     <>
                       <Send size={20} />
-                      Submit Booking Request
+                      {dict.submit}
                     </>
                   )}
                 </button>
               </div>
 
-              <p className="text-center text-sm text-gray-500 mt-4">
-                * Required fields. We respect your privacy and will never share your information.
+              <p className="text-center text-xs font-bold text-gray-500 mt-4 uppercase tracking-widest">
+                * {dict.loading === 'Cargando...' ? 'Campos obligatorios. Respetamos su privacidad y nunca compartiremos su información.' : 'Required fields. We respect your privacy and will never share your information.'}
               </p>
             </form>
           </motion.div>

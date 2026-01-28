@@ -3,34 +3,45 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Dumbbell, Timer, HeartPulse } from 'lucide-react';
 
-export default function Hero() {
+export default function Hero({ dict }: { dict: any }) {
+  if (!dict) return null;
+
   return (
-    <section id="home" className="bg-fd-black flex lg:max-h-[400px] ">
-      <div className="justify-center w-full mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row min-h-[400px] ">
-        <div className="m-2 min-h-[240px] lg:w-[50%] p-4 relative flex items-center justify-center">
-          {/* Left Side - Text Content */}
-          <div>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase leading-none mb-4">
-              <span className="text-fd-red block">FEDERICO</span>
-              <span className="text-fd-red block">DEVESA</span>
+    <section id="home" className="bg-fd-black flex lg:max-h-[400px]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-24 flex flex-col items-center justify-between min-h-[120px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center lg:text-left"
+          >
+            <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-white mb-4 leading-none">
+              {dict.title.split(' ')[0]} <br />
+              <span className="text-fd-red">{dict.title.split(' ')[1]}</span>
             </h1>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase text-white leading-tight">
-              EUROPA TOUR<br />2026
-            </h2>
+            <p className="text-white text-xl md:text-2xl font-bold mb-8 uppercase tracking-widest bg-fd-red inline-block px-4 py-1">
+              {dict.subtitle}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <a
+                href="#booking"
+                className="bg-fd-red text-white px-8 py-4 rounded-lg font-bold text-sm tracking-widest uppercase hover:bg-red-700 transition-all duration-200 shadow-xl hover:shadow-fd-red/20"
+              >
+                {dict.description}
+              </a>
+            </div>
+          </motion.div>
+          <div className="hidden lg:block">
+            <Image
+              src="/images/federico-devesa.png"
+              alt="Federico Devesa"
+              width={500}
+              height={500}
+              className="w-full h-auto max-w-[400px]"
+            />
           </div>
-        </div>
-
-        <div className="m-2 lg:w-[50%] p-4 relative flex items-center justify-center">
-          {/* Right Side - Image */}
-          <Image
-            src="/images/federico-devesa.png"
-            alt="Hero Image"
-            width={500}
-            height={500}
-            className="w-full h-auto max-w-[400px]"
-          />
         </div>
       </div>
     </section>

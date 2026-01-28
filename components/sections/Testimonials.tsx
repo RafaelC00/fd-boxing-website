@@ -53,7 +53,9 @@ const StarRating = ({ rating }: { rating: number }) => {
   );
 };
 
-export default function Testimonials() {
+export default function Testimonials({ dict }: { dict: any }) {
+  if (!dict) return null;
+
   return (
     <section id="testimonials" className="py-24 bg-fd-black">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,12 +66,12 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-fd-red text-sm uppercase tracking-wider mb-2">@FD.BOXING</p>
+          <p className="text-fd-red text-sm uppercase tracking-widest font-bold mb-2">@FD.BOXING</p>
           <h2 className="text-4xl md:text-5xl font-black uppercase text-white mb-6">
-            What People <span className="text-fd-red">Say</span>
+            {dict.title.split(' ')[0]} {dict.title.split(' ')[1]} <span className="text-fd-red">{dict.title.split(' ')[2]}</span>
           </h2>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            Hear from coaches, fighters, and academy owners who have experienced FD-Boxing seminars
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto uppercase font-medium">
+            {dict.description}
           </p>
         </motion.div>
 
@@ -95,10 +97,10 @@ export default function Testimonials() {
               </p>
 
               <div className="border-t border-gray-200 pt-6">
-                <p className="font-bold text-fd-black text-lg">{testimonial.name}</p>
-                <p className="text-gray-600">{testimonial.role}</p>
+                <p className="font-bold text-fd-black text-lg uppercase">{testimonial.name}</p>
+                <p className="text-gray-600 uppercase text-sm font-medium">{testimonial.role}</p>
                 {testimonial.academy && (
-                  <p className="text-fd-red font-medium">{testimonial.academy}</p>
+                  <p className="text-fd-red font-bold uppercase text-sm">{testimonial.academy}</p>
                 )}
               </div>
             </motion.div>
@@ -112,14 +114,14 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <p className="text-white text-lg mb-8">
-            Ready to bring this experience to your academy?
+          <p className="text-white text-lg mb-8 uppercase font-medium">
+            {dict.cta.replace('Book Your Seminar Today', '')}
           </p>
           <a
             href="#booking"
-            className="inline-block bg-fd-red text-white px-12 py-4 font-bold uppercase text-sm tracking-wider hover:bg-red-700 transition-all duration-200 shadow-2xl hover:shadow-xl"
+            className="inline-block bg-fd-red text-white px-12 py-4 font-bold uppercase text-sm tracking-widest hover:bg-red-700 transition-all duration-200 shadow-2xl hover:shadow-xl"
           >
-            Book Your Seminar Today
+            {dict.cta}
           </a>
         </motion.div>
       </div>

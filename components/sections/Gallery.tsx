@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { X } from 'lucide-react';
 
-// Placeholder images - replace with actual images
 const galleryImages = [
   { id: 1, category: 'seminar', alt: 'Seminar in Barcelona' },
   { id: 2, category: 'training', alt: 'Training session' },
@@ -16,8 +15,10 @@ const galleryImages = [
   { id: 8, category: 'training', alt: 'Padwork session' },
 ];
 
-export default function Gallery() {
+export default function Gallery({ dict }: { dict: any }) {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+
+  if (!dict) return null;
 
   return (
     <section id="gallery" className="py-24 bg-white">
@@ -30,10 +31,10 @@ export default function Gallery() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-black uppercase text-fd-black mb-6">
-            <span className="text-fd-red">Gallery</span>
+            <span className="text-fd-red">{dict.title}</span>
           </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Moments from seminars, training sessions, and events across Europe
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto uppercase font-medium">
+            {dict.description}
           </p>
         </motion.div>
 
@@ -45,7 +46,7 @@ export default function Gallery() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
               viewport={{ once: true }}
-              className="aspect-square bg-gradient-to-br from-gray-700 to-gray-800 rounded-lg overflow-hidden cursor-pointer group relative"
+              className="aspect-square bg-linear-to-br from-gray-700 to-gray-800 rounded-lg overflow-hidden cursor-pointer group relative"
               onClick={() => setSelectedImage(image.id)}
             >
               <div className="absolute inset-0 flex items-center justify-center">
@@ -59,7 +60,6 @@ export default function Gallery() {
           ))}
         </div>
 
-        {/* Lightbox Modal */}
         {selectedImage && (
           <div
             className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-4"
@@ -71,7 +71,7 @@ export default function Gallery() {
             >
               <X size={32} />
             </button>
-            <div className="max-w-4xl w-full aspect-video bg-gradient-to-br from-gray-700 to-gray-800 rounded-lg flex items-center justify-center">
+            <div className="max-w-4xl w-full aspect-video bg-linear-to-br from-gray-700 to-gray-800 rounded-lg flex items-center justify-center">
               <p className="text-white text-lg">
                 {galleryImages.find(img => img.id === selectedImage)?.alt}
               </p>
@@ -86,14 +86,14 @@ export default function Gallery() {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <p className="text-gray-300 mb-6">
+          <p className="text-gray-300 mb-6 uppercase tracking-widest text-sm font-bold">
             Follow us on Instagram for daily updates and behind-the-scenes content
           </p>
           <a
             href="https://instagram.com/fd.boxing"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-fd-red text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+            className="inline-block bg-fd-red text-white px-8 py-3 rounded-lg font-bold tracking-widest hover:bg-red-700 transition-all duration-200 shadow-lg hover:shadow-xl"
           >
             @FD.BOXING
           </a>

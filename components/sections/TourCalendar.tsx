@@ -4,17 +4,16 @@ import { motion } from 'framer-motion';
 import { Calendar, MapPin, CheckCircle, Clock, Users } from 'lucide-react';
 import { TourDate } from '@/types';
 
-// Sample tour data removed - now passed via props
-
 interface TourCalendarProps {
   tourDates: TourDate[];
+  dict: any;
 }
 
-const StatusBadge = ({ status }: { status: TourDate['status'] }) => {
+const StatusBadge = ({ status, dict }: { status: TourDate['status'], dict: any }) => {
   const badges = {
     confirmed: { bg: 'bg-green-100', text: 'text-green-800', icon: CheckCircle, label: 'Confirmed' },
-    pending: { bg: 'bg-yellow-100', text: 'text-yellow-800', icon: Clock, label: 'Pending' },
-    available: { bg: 'bg-blue-100', text: 'text-blue-800', icon: Users, label: 'Available to Book' },
+    pending: { bg: 'bg-yellow-100', text: 'text-yellow-800', icon: Clock, label: dict.comingSoon },
+    available: { bg: 'bg-blue-100', text: 'text-blue-800', icon: Users, label: dict.bookDate },
   };
 
   const badge = badges[status];
@@ -28,10 +27,12 @@ const StatusBadge = ({ status }: { status: TourDate['status'] }) => {
   );
 };
 
-export default function TourCalendar({ tourDates }: TourCalendarProps) {
+export default function TourCalendar({ tourDates, dict }: TourCalendarProps) {
+  if (!dict) return null;
+
   const formatDate = (date: string, endDate?: string) => {
     const start = new Date(date);
-    const startFormatted = start.toLocaleDateString('en-US', {
+    const startFormatted = start.toLocaleDateString(undefined, {
       month: 'short',
       day: 'numeric',
       year: 'numeric'
@@ -39,7 +40,7 @@ export default function TourCalendar({ tourDates }: TourCalendarProps) {
 
     if (endDate) {
       const end = new Date(endDate);
-      const endFormatted = end.toLocaleDateString('en-US', {
+      const endFormatted = end.toLocaleDateString(undefined, {
         month: 'short',
         day: 'numeric'
       });
@@ -59,13 +60,12 @@ export default function TourCalendar({ tourDates }: TourCalendarProps) {
           viewport={{ once: true }}
           className="text-center mb-16 w-full flex flex-col items-center justify-between min-h-[120px]"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-fd-black mb-4">
-            Seminars /  <span className="text-fd-red">Master Classes</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-fd-black mb-4 uppercase">
+            {dict.title.split(' / ')[0]} / <span className="text-fd-red">{dict.title.split(' / ')[1]}</span>
           </h2>
           <div className="w-100 h-1 bg-fd-red mx-auto mb-8"></div>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Join Federico De Vesa as he brings world-class boxing training across Europe.
-            Book your academy's spot or attend a confirmed seminar.
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto uppercase font-medium">
+            {dict.description}
           </p>
         </motion.div>
 
@@ -92,16 +92,16 @@ export default function TourCalendar({ tourDates }: TourCalendarProps) {
                     <p className="text-lg">{formatDate(tour.date, tour.endDate)}</p>
                   </div>
                 </div>
-                <StatusBadge status={tour.status} />
+                <StatusBadge status={tour.status} dict={dict} />
               </div>
 
               <div className="space-y-2 mb-4">
                 <p className="text-gray-700">
-                  <span className="font-semibold">Venue:</span> {tour.venue}
+                  <span className="font-semibold">{dict.venue}:</span> {tour.venue}
                 </p>
                 {tour.spotsAvailable && (
                   <p className="text-gray-700">
-                    <span className="font-semibold">Spots Available:</span> {tour.spotsAvailable}
+                    <span className="font-semibold">{dict.spots}:</span> {tour.spotsAvailable}
                   </p>
                 )}
                 {tour.description && (
@@ -112,24 +112,24 @@ export default function TourCalendar({ tourDates }: TourCalendarProps) {
               {tour.status === 'available' && (
                 <a
                   href="#booking"
-                  className="inline-block w-full text-center bg-fd-red text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-all duration-200 shadow-md hover:shadow-lg"
+                  className="inline-block w-full text-center bg-fd-red text-white px-6 py-3 rounded-lg font-bold uppercase text-sm tracking-widest hover:bg-red-700 transition-all duration-200 shadow-md hover:shadow-lg"
                 >
-                  Book This Date
+                  {dict.bookDate}
                 </a>
               )}
 
               {tour.status === 'confirmed' && tour.spotsAvailable && tour.spotsAvailable > 0 && (
                 <a
                   href="#booking"
-                  className="inline-block w-full text-center bg-fd-black text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-all duration-200 shadow-md hover:shadow-lg"
+                  className="inline-block w-full text-center bg-fd-black text-white px-6 py-3 rounded-lg font-bold uppercase text-sm tracking-widest hover:bg-gray-800 transition-all duration-200 shadow-md hover:shadow-lg"
                 >
-                  Register to Attend
+                  {dict.register}
                 </a>
               )}
 
               {tour.status === 'pending' && (
                 <div className="text-center text-gray-500 italic py-2">
-                  Details coming soon...
+                  {dict.comingSoon}
                 </div>
               )}
             </motion.div>
@@ -143,18 +143,17 @@ export default function TourCalendar({ tourDates }: TourCalendarProps) {
           viewport={{ once: true }}
           className="text-center rounded-lg shadow-lg p-8"
         >
-          <h3 className="text-2xl font-bold text-fd-black mb-4">
-            Don't see your city?
+          <h3 className="text-2xl font-bold text-fd-black mb-4 uppercase">
+            {dict.notListedTitle}
           </h3>
-          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-            Book Federico for your academy or gym! We're actively expanding the tour
-            and would love to bring FD-Boxing training to your location.
+          <p className="text-gray-600 mb-6 max-w-2xl mx-auto uppercase font-medium">
+            {dict.notListedDesc}
           </p>
           <a
             href="#booking"
-            className="inline-block bg-fd-red text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-red-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+            className="inline-block bg-fd-red text-white px-8 py-4 rounded-lg font-bold uppercase text-sm tracking-widest hover:bg-red-700 transition-all duration-200 shadow-lg hover:shadow-xl"
           >
-            Request a Seminar
+            {dict.bookDate}
           </a>
         </motion.div>
       </div>

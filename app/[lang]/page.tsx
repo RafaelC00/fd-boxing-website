@@ -8,8 +8,11 @@ import Testimonials from '@/components/sections/Testimonials';
 
 import { supabase } from '@/lib/supabase';
 import { TourDate } from '@/types';
+import { getDictionary } from '@/src/i18n/get-dictionary';
 
-export const revalidate = 0; // Force revalidate on every request for dynamic tour dates
+export const revalidate = 0;
+
+// Force revalidate on every request for dynamic tour dates
 // CI/CD Test: 2026-01-27T21:28
 async function getTourDates(): Promise<TourDate[]> {
   try {
@@ -45,18 +48,38 @@ async function getTourDates(): Promise<TourDate[]> {
   }
 }
 
-export default async function Home() {
-  const tourDates = await getTourDates();
+export default async function Home(props: { params: any }) {
+  try {
+    const { lang } = await props.params;
+    console.log('Rendering Home for lang:', lang);
 
-  return (
-    <main className="min-h-screen">
-      <Hero />
-      <About />
-      <TourCalendar tourDates={tourDates} />
-      <Gallery />
-      <Testimonials />
-      <BookingForm />
-      <VideoBackground />
-    </main>
-  );
+    const dict = await getDictionary(lang);
+    if (!dict) {
+      console.error('FAILED TO LOAD DICTIONARY FOR:', lang);
+      return <div>Error loading dictionary</div>;
+    }
+
+    const tourDates = await getTourDates();
+
+    return (
+      <main className="min-h-screen">
+        <Hero dict={dict.hero} />
+        <About dict={dict.about} />
+        <TourCalendar tourDates={tourDates} dict={dict.tour} />
+        <Gallery dict={dict.gallery} />
+        <Testimonials dict={dict.testimonials} />
+        <BookingForm dict={dict.booking} />
+        <VideoBackground />
+      </main>
+    );
+  } catch (err: any) {
+    console.error('CRITICAL SSR ERROR:', err);
+    return (
+      <div className="p-10 bg-red-100 text-red-900">
+        <h1 className="text-2xl font-bold">SSR Error</h1>
+        <pre className="mt-4 p-4 bg-white rounded">{err.message}</pre>
+        <pre className="mt-2 text-xs opacity-50">{err.stack}</pre>
+      </div>
+    );
+  }
 }
