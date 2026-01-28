@@ -9,8 +9,8 @@ import Testimonials from '@/components/sections/Testimonials';
 import { supabase } from '@/lib/supabase';
 import { TourDate } from '@/types';
 
-export const revalidate = 0; // Ensure fresh data on every request
-
+export const revalidate = 0; // Force revalidate on every request for dynamic tour dates
+// CI/CD Test: 2026-01-27T21:28
 async function getTourDates(): Promise<TourDate[]> {
   const { data, error } = await supabase
     .from('tour_dates')

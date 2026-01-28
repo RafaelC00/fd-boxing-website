@@ -33,3 +33,7 @@ Since there is no Admin UI in the app yet, you should use the **Supabase Dashboa
 -   **Deploy:** Push these changes to GitHub/Vercel.
 -   **Email:** Sign up for Resend.com to enable email notifications for bookings.
 -   **Photos:** Replace placeholder images in `public/images/`.
+
+## Deployment Links
+-   **Live Site:** [https://fd-boxing-website.vercel.app](https://fd-boxing-website.vercel.app)
+-   **GitHub Repo:** [fd-boxing-website](https://github.com/rafaelc00/fd-boxing-website)

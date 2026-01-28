@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
-import { BookingFormData } from '@/types';
 
 const bookingSchema = z.object({
   academyName: z.string().min(2, 'Academy name must be at least 2 characters'),
@@ -20,6 +19,20 @@ const bookingSchema = z.object({
   message: z.string().min(20, 'Please provide more details (minimum 20 characters)'),
 });
 
+interface BookingFormData {
+  academyName: string;
+  contactName: string;
+  email: string;
+  phone: string;
+  city: string;
+  country: string;
+  preferredDates: string;
+  numberOfParticipants: number;
+  message: string;
+}
+
+type BookingFormSchema = BookingFormData;
+
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 export default function BookingForm() {
@@ -30,11 +43,11 @@ export default function BookingForm() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<BookingFormData>({
-    resolver: zodResolver(bookingSchema),
+  } = useForm<BookingFormSchema>({
+    resolver: zodResolver(bookingSchema) as any,
   });
 
-  const onSubmit = async (data: BookingFormData) => {
+  const onSubmit = async (data: BookingFormSchema) => {
     setFormStatus('submitting');
 
     try {
@@ -114,183 +127,183 @@ export default function BookingForm() {
                   Academy Information
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Academy Name */}
-                <div>
-                  <label htmlFor="academyName" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Academy/Gym Name *
-                  </label>
-                  <input
-                    {...register('academyName')}
-                    type="text"
-                    id="academyName"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
-                    placeholder="Elite Boxing Academy"
-                  />
-                  {errors.academyName && (
-                    <p className="mt-1 text-sm text-red-600">{errors.academyName.message}</p>
-                  )}
-                </div>
+                  {/* Academy Name */}
+                  <div>
+                    <label htmlFor="academyName" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Academy/Gym Name *
+                    </label>
+                    <input
+                      {...register('academyName')}
+                      type="text"
+                      id="academyName"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
+                      placeholder="Elite Boxing Academy"
+                    />
+                    {errors.academyName && (
+                      <p className="mt-1 text-sm text-red-600">{errors.academyName.message}</p>
+                    )}
+                  </div>
 
-                {/* Contact Name */}
-                <div>
-                  <label htmlFor="contactName" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Contact Person *
-                  </label>
-                  <input
-                    {...register('contactName')}
-                    type="text"
-                    id="contactName"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
-                    placeholder="John Smith"
-                  />
-                  {errors.contactName && (
-                    <p className="mt-1 text-sm text-red-600">{errors.contactName.message}</p>
-                  )}
+                  {/* Contact Name */}
+                  <div>
+                    <label htmlFor="contactName" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Contact Person *
+                    </label>
+                    <input
+                      {...register('contactName')}
+                      type="text"
+                      id="contactName"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
+                      placeholder="John Smith"
+                    />
+                    {errors.contactName && (
+                      <p className="mt-1 text-sm text-red-600">{errors.contactName.message}</p>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Contact Information Section */}
-            <div>
-              <h3 className="text-xl font-bold text-fd-black mb-6 pb-3 border-b-2 border-gray-200">
-                Contact Information
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Email */}
-                <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Email Address *
-                  </label>
-                  <input
-                    {...register('email')}
-                    type="email"
-                    id="email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
-                    placeholder="contact@academy.com"
-                  />
-                  {errors.email && (
-                    <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
-                  )}
-                </div>
+              {/* Contact Information Section */}
+              <div>
+                <h3 className="text-xl font-bold text-fd-black mb-6 pb-3 border-b-2 border-gray-200">
+                  Contact Information
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Email */}
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      {...register('email')}
+                      type="email"
+                      id="email"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
+                      placeholder="contact@academy.com"
+                    />
+                    {errors.email && (
+                      <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                    )}
+                  </div>
 
-                {/* Phone */}
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Phone Number *
-                  </label>
-                  <input
-                    {...register('phone')}
-                    type="tel"
-                    id="phone"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
-                    placeholder="+34 600 123 456"
-                  />
-                  {errors.phone && (
-                    <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {/* Location & Event Details Section */}
-            <div>
-              <h3 className="text-xl font-bold text-fd-black mb-6 pb-3 border-b-2 border-gray-200">
-                Location & Event Details
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* City */}
-                <div>
-                  <label htmlFor="city" className="block text-sm font-semibold text-gray-700 mb-2">
-                    City *
-                  </label>
-                  <input
-                    {...register('city')}
-                    type="text"
-                    id="city"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
-                    placeholder="Barcelona"
-                  />
-                  {errors.city && (
-                    <p className="mt-1 text-sm text-red-600">{errors.city.message}</p>
-                  )}
-                </div>
-
-                {/* Country */}
-                <div>
-                  <label htmlFor="country" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Country *
-                  </label>
-                  <input
-                    {...register('country')}
-                    type="text"
-                    id="country"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
-                    placeholder="Spain"
-                  />
-                  {errors.country && (
-                    <p className="mt-1 text-sm text-red-600">{errors.country.message}</p>
-                  )}
-                </div>
-
-                {/* Preferred Dates */}
-                <div>
-                  <label htmlFor="preferredDates" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Preferred Dates *
-                  </label>
-                  <input
-                    {...register('preferredDates')}
-                    type="text"
-                    id="preferredDates"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
-                    placeholder="March 15-16, 2026"
-                  />
-                  {errors.preferredDates && (
-                    <p className="mt-1 text-sm text-red-600">{errors.preferredDates.message}</p>
-                  )}
-                </div>
-
-                {/* Number of Participants */}
-                <div>
-                  <label htmlFor="numberOfParticipants" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Expected Participants *
-                  </label>
-                  <input
-                    {...register('numberOfParticipants')}
-                    type="number"
-                    id="numberOfParticipants"
-                    min="5"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
-                    placeholder="20"
-                  />
-                  {errors.numberOfParticipants && (
-                    <p className="mt-1 text-sm text-red-600">{errors.numberOfParticipants.message}</p>
-                  )}
+                  {/* Phone */}
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Phone Number *
+                    </label>
+                    <input
+                      {...register('phone')}
+                      type="tel"
+                      id="phone"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
+                      placeholder="+34 600 123 456"
+                    />
+                    {errors.phone && (
+                      <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
+
+              {/* Location & Event Details Section */}
+              <div>
+                <h3 className="text-xl font-bold text-fd-black mb-6 pb-3 border-b-2 border-gray-200">
+                  Location & Event Details
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* City */}
+                  <div>
+                    <label htmlFor="city" className="block text-sm font-semibold text-gray-700 mb-2">
+                      City *
+                    </label>
+                    <input
+                      {...register('city')}
+                      type="text"
+                      id="city"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
+                      placeholder="Barcelona"
+                    />
+                    {errors.city && (
+                      <p className="mt-1 text-sm text-red-600">{errors.city.message}</p>
+                    )}
+                  </div>
+
+                  {/* Country */}
+                  <div>
+                    <label htmlFor="country" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Country *
+                    </label>
+                    <input
+                      {...register('country')}
+                      type="text"
+                      id="country"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
+                      placeholder="Spain"
+                    />
+                    {errors.country && (
+                      <p className="mt-1 text-sm text-red-600">{errors.country.message}</p>
+                    )}
+                  </div>
+
+                  {/* Preferred Dates */}
+                  <div>
+                    <label htmlFor="preferredDates" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Preferred Dates *
+                    </label>
+                    <input
+                      {...register('preferredDates')}
+                      type="text"
+                      id="preferredDates"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
+                      placeholder="March 15-16, 2026"
+                    />
+                    {errors.preferredDates && (
+                      <p className="mt-1 text-sm text-red-600">{errors.preferredDates.message}</p>
+                    )}
+                  </div>
+
+                  {/* Number of Participants */}
+                  <div>
+                    <label htmlFor="numberOfParticipants" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Expected Participants *
+                    </label>
+                    <input
+                      {...register('numberOfParticipants')}
+                      type="number"
+                      id="numberOfParticipants"
+                      min="5"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all"
+                      placeholder="20"
+                    />
+                    {errors.numberOfParticipants && (
+                      <p className="mt-1 text-sm text-red-600">{errors.numberOfParticipants.message}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
 
               {/* Additional Information Section */}
               <div>
                 <h3 className="text-xl font-bold text-fd-black mb-6 pb-3 border-b-2 border-gray-200">
                   Additional Information
                 </h3>
-              {/* Message */}
-              <div>
-                <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Additional Information *
-                </label>
-                <textarea
-                  {...register('message')}
-                  id="message"
-                  rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all resize-none"
-                  placeholder="Tell us about your academy, training level of participants, specific topics you'd like to cover, facilities available, etc."
-                />
-                {errors.message && (
-                  <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
-                )}
+                {/* Message */}
+                <div>
+                  <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Additional Information *
+                  </label>
+                  <textarea
+                    {...register('message')}
+                    id="message"
+                    rows={6}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fd-red focus:border-transparent transition-all resize-none"
+                    placeholder="Tell us about your academy, training level of participants, specific topics you'd like to cover, facilities available, etc."
+                  />
+                  {errors.message && (
+                    <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
+                  )}
+                </div>
               </div>
-            </div>
 
               {/* Submit Button */}
               <div className="flex justify-center pt-6 border-t-2 border-gray-200">
