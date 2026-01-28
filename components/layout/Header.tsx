@@ -35,8 +35,9 @@ export default function Header() {
   const navLinks = [
     { href: '#tour', label: 'European Tour' },
     { href: '#about', label: 'About' },
-    { href: '#courses', label: 'Courses' },
-    { href: '#contact', label: 'Contact' },
+    { href: '#gallery', label: 'Gallery' },
+    { href: '#testimonials', label: 'Testimonials' },
+    { href: '#booking', label: 'Contact' },
   ];
 
   return (

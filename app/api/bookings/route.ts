@@ -52,8 +52,37 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Send email notification
-    // You can integrate Resend or SendGrid here
+    // Send email notification using Resend
+    const resendApiKey = process.env.RESEND_API_KEY;
+    if (resendApiKey) {
+      try {
+        const { Resend } = await import('resend');
+        const resend = new Resend(resendApiKey);
+
+        await resend.emails.send({
+          from: 'FD Boxing <onboarding@resend.dev>', // You should verify your domain in Resend
+          to: 'fededevesa81@gmail.com',
+          subject: `New Seminar Booking: ${academyName}`,
+          html: `
+            <h1>New Seminar Booking Request</h1>
+            <p><strong>Academy:</strong> ${academyName}</p>
+            <p><strong>Contact:</strong> ${contactName}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
+            <p><strong>Location:</strong> ${city}, ${country}</p>
+            <p><strong>Preferred Dates:</strong> ${preferredDates}</p>
+            <p><strong>Participants:</strong> ${numberOfParticipants}</p>
+            <p><strong>Message:</strong></p>
+            <p>${message}</p>
+          `,
+        });
+      } catch (emailError) {
+        console.error('Failed to send email:', emailError);
+        // We don't return error here because the booking was already saved to DB
+      }
+    } else {
+      console.warn('RESEND_API_KEY missing. Email notification skipped.');
+    }
 
     return NextResponse.json(
       { success: true, data },
