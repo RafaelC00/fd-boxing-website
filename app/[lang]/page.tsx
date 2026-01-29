@@ -64,11 +64,9 @@ export default async function Home(props: { params: any }) {
     return (
       <main className="min-h-screen">
         <Hero dict={dict.hero} />
-        <About dict={dict.about} />
         <TourCalendar tourDates={tourDates} dict={dict.tour} />
-        <Gallery dict={dict.gallery} />
-        <Testimonials dict={dict.testimonials} />
         <BookingForm dict={dict.booking} />
+        <About dict={dict.about} />
         <VideoBackground />
       </main>
     );

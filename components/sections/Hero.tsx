@@ -8,8 +8,8 @@ export default function Hero({ dict }: { dict: any }) {
   if (!dict) return null;
 
   return (
-    <section id="home" className="bg-fd-black flex lg:max-h-[400px]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-24 flex flex-col items-center justify-between min-h-[120px]">
+    <section id="home" className="bg-fd-black flex lg:max-h-[500px]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-10 lg:py-24 flex flex-col items-center justify-between min-h-[120px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -24,22 +24,14 @@ export default function Hero({ dict }: { dict: any }) {
             <p className="text-white text-xl md:text-2xl font-bold mb-8 uppercase tracking-widest bg-fd-red inline-block px-4 py-1">
               {dict.subtitle}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <a
-                href="#booking"
-                className="bg-fd-red text-white px-8 py-4 rounded-lg font-bold text-sm tracking-widest uppercase hover:bg-red-700 transition-all duration-200 shadow-xl hover:shadow-fd-red/20"
-              >
-                {dict.description}
-              </a>
-            </div>
           </motion.div>
-          <div className="hidden lg:block">
+          <div className="flex justify-center lg:block">
             <Image
               src="/images/federico-devesa.png"
               alt="Federico Devesa"
               width={500}
               height={500}
-              className="w-full h-auto max-w-[400px]"
+              className="w-full h-auto max-w-[300px] md:max-w-[400px]"
             />
           </div>
         </div>

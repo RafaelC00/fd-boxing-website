@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const createBookingSchema = (dict: any) => z.object({
   academyName: z.string().min(2, dict.fields.academyName),
@@ -51,19 +52,31 @@ export default function BookingForm({ dict }: { dict: any }) {
     setFormStatus('submitting');
 
     try {
-      const response = await fetch('/api/bookings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      // EmailJS configuration - get these from your EmailJS dashboard
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
 
-      if (response.ok) {
-        setFormStatus('success');
-        reset();
-        setTimeout(() => setFormStatus('idle'), 5000);
-      } else {
-        throw new Error('Failed to submit');
-      }
+      // Prepare template parameters
+      const templateParams = {
+        academy_name: data.academyName,
+        contact_name: data.contactName,
+        contact_email: data.email,
+        contact_phone: data.phone,
+        city: data.city,
+        country: data.country,
+        preferred_dates: data.preferredDates,
+        participants: data.numberOfParticipants,
+        message: data.message,
+        to_email: 'rafacaicedo@hotmail.com', // Your email
+      };
+
+      // Send email using EmailJS
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+      setFormStatus('success');
+      reset();
+      setTimeout(() => setFormStatus('idle'), 5000);
     } catch (error) {
       console.error('Booking submission error:', error);
       setFormStatus('error');

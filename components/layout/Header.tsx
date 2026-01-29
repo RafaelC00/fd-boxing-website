@@ -47,8 +47,6 @@ export default function Header({ lang }: { lang: string }) {
   const navLinks = dict ? [
     { href: '#tour', label: dict.nav.tour },
     { href: '#about', label: dict.nav.about },
-    { href: '#gallery', label: dict.nav.gallery },
-    { href: '#testimonials', label: dict.nav.testimonials },
     { href: '#booking', label: dict.nav.contact },
   ] : [];
 
@@ -61,13 +59,19 @@ export default function Header({ lang }: { lang: string }) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 w-full h-30 flex items-center justify-center transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'
+      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'
         }`}
     >
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between w-full py-4">
+      <nav className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between w-full py-2 lg:py-4">
         {/* Logo */}
         <Link href={`/${lang}`} className="shrink-0">
-          <Image src="/images/logo.jpg" alt="Logo" width={140} height={100} />
+          <Image
+            src="/images/logo.jpg"
+            alt="Logo"
+            width={140}
+            height={100}
+            className="w-24 h-auto lg:w-[140px]"
+          />
         </Link>
 
         {/* Desktop Navigation */}

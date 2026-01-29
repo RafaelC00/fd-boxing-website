@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 
+import Image from 'next/image';
+
 export default function About({ dict }: { dict: any }) {
   if (!dict) return null;
 
@@ -17,12 +19,14 @@ export default function About({ dict }: { dict: any }) {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="aspect-4/3 bg-linear-to-br from-gray-300 to-gray-400 rounded-lg shadow-2xl flex items-center justify-center overflow-hidden">
-              <div className="text-center text-gray-600">
-                <p className="text-xl font-semibold mb-2">Training Photo Here</p>
-                <p className="text-sm">Place photo of Federico training students</p>
-                <p className="text-xs mt-4">Format: 800x600px (landscape)</p>
-              </div>
+            <div className="rounded-lg shadow-2xl flex items-center justify-center overflow-hidden">
+              <Image
+                src="/images/FEDEDEVESA.jpg"
+                alt="Federico Devesa training"
+                width={800}
+                height={800}
+                className="w-full h-full object-cover"
+              />
             </div>
           </motion.div>
 

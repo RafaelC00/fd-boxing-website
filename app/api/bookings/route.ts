@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
 
         await resend.emails.send({
           from: 'FD Boxing <onboarding@resend.dev>', // You should verify your domain in Resend
-          to: 'fededevesa81@gmail.com',
+          to: 'rafacaicedo@hotmail.com',
           subject: `New Seminar Booking: ${academyName}`,
           html: `
             <h1>New Seminar Booking Request</h1>

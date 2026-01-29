@@ -135,27 +135,6 @@ export default function TourCalendar({ tourDates, dict }: TourCalendarProps) {
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center rounded-lg shadow-lg p-8"
-        >
-          <h3 className="text-2xl font-bold text-fd-black mb-4 uppercase">
-            {dict.notListedTitle}
-          </h3>
-          <p className="text-gray-600 mb-6 max-w-2xl mx-auto uppercase font-medium">
-            {dict.notListedDesc}
-          </p>
-          <a
-            href="#booking"
-            className="inline-block bg-fd-red text-white px-8 py-4 rounded-lg font-bold uppercase text-sm tracking-widest hover:bg-red-700 transition-all duration-200 shadow-lg hover:shadow-xl"
-          >
-            {dict.bookDate}
-          </a>
-        </motion.div>
       </div>
     </section>
   );

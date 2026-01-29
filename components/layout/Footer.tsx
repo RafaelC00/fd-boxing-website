@@ -24,7 +24,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="flex-1 md:text-center">
-            <h3 className="text-lg font-semibold mb-4 font-[family-name:var(--font-geist-mono)]">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-4 font-(family-name:--font-geist-mono)">Quick Links</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="#about" className="text-gray-400 hover:text-fd-red transition-colors">
@@ -41,17 +41,12 @@ export default function Footer() {
                   Book a Seminar
                 </Link>
               </li>
-              <li>
-                <Link href="#gallery" className="text-gray-400 hover:text-fd-red transition-colors">
-                  Gallery
-                </Link>
-              </li>
             </ul>
           </div>
 
           {/* Social & Contact */}
           <div className="flex-1 md:text-right">
-            <h3 className="text-lg font-semibold mb-4 font-[family-name:var(--font-geist-mono)]">Connect</h3>
+            <h3 className="text-lg font-semibold mb-4 font-[family-name:var(--font-geist-mono)]"> Connect</h3>
             <div className="flex md:justify-end space-x-4 mb-4">
               <a
                 href="https://instagram.com/federicodevesa"
@@ -83,7 +78,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="mailto:fededevesa81@gmail.com"
+                href="mailto:rafacaicedo@hotmail.com"
                 className="text-gray-400 hover:text-fd-red transition-colors"
                 aria-label="Email"
               >
